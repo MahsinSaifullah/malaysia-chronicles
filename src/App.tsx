@@ -1,10 +1,9 @@
-import React from "react";
-import { Landing } from "./components";
+import { Landing } from './components';
 
 export const App = () => {
   return (
-    <div>
+    <main className="h-screen bg-gradient-to-r from-stone-600 to-slate-900">
       <Landing />
-    </div>
+    </main>
   );
 };

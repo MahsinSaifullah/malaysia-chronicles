@@ -2,7 +2,7 @@ import { Title } from '../shared';
 
 export const Landing = () => {
   return (
-    <main className="flex justify-center items-center h-screen flex-col gap-y-16 bg-gradient-to-r from-stone-600 to-slate-900">
+    <section className="flex h-[100%] w-[100%] flex-col gap-y-16 justify-center items-center">
       <div className="flex flex-col gap-y-4 items-center">
         <Title />
         <h3 className="text-sm lg:text-lg tracking-widest font-light text-white">
@@ -17,6 +17,6 @@ export const Landing = () => {
           To Bring
         </button>
       </div>
-    </main>
+    </section>
   );
 };

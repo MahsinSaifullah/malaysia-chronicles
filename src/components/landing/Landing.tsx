@@ -1,12 +1,10 @@
-import React from "react";
+import { Title } from '../shared';
 
 export const Landing = () => {
   return (
     <main className="flex justify-center items-center h-screen flex-col gap-y-16 bg-gradient-to-r from-stone-600 to-slate-900">
       <div className="flex flex-col gap-y-4 items-center">
-        <h1 className="text-xl lg:text-4xl font-bold tracking-widest text-white">
-          ✈️ MALAYSIA CHRONICLES ✈️
-        </h1>
+        <Title />
         <h3 className="text-sm lg:text-lg tracking-widest font-light text-white">
           Choose your path:
         </h3>

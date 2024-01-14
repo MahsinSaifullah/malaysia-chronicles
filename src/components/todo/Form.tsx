@@ -1,13 +1,6 @@
 export const Form = () => {
   return (
-    <form
-      className="
-      flex
-      flex-col
-      min-w-[600px]
-      mt-[32px] 
-       shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] bg-stone-500 rounded-md p-8"
-    >
+    <form className="flex flex-col min-w-[600px] mt-[32px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] bg-stone-500 rounded-md p-8">
       <label className="text-white max-w-[400px] text-xl tracking-widest font-medium border-b-[1px] pb-2 border-neutral-200">
         What do you want to take?
       </label>

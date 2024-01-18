@@ -1,4 +1,5 @@
-import { Title } from '../shared';
+import { Link } from "react-router-dom";
+import { Title } from "../shared";
 
 export const Landing = () => {
   return (
@@ -10,12 +11,18 @@ export const Landing = () => {
         </h3>
       </div>
       <div className="flex justify-center w-1/2 gap-x-8">
-        <button className="text-sm lg:text-lg w-1/2 max-w-[300px] min-w-[100px] bg-slate-500 hover:bg-slate-600 text-white  py-2 px-4 rounded">
+        <Link
+          to="/todo/take"
+          className="text-sm lg:text-lg w-1/2 max-w-[300px] min-w-[100px] bg-slate-500 hover:bg-slate-600 text-white  py-2 px-4 rounded"
+        >
           To Take
-        </button>
-        <button className="text-sm lg:text-lg w-1/2 max-w-[300px] min-w-[100px] bg-slate-500 hover:bg-slate-600 text-white  py-2 px-4 rounded">
+        </Link>
+        <Link
+          to="/todo/bring"
+          className="text-sm lg:text-lg w-1/2 max-w-[300px] min-w-[100px] bg-slate-500 hover:bg-slate-600 text-white  py-2 px-4 rounded"
+        >
           To Bring
-        </button>
+        </Link>
       </div>
     </section>
   );

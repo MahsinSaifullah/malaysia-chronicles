@@ -1,6 +1,6 @@
-import { Title } from '../shared';
-import { Form } from './Form';
-import { List } from './List';
+import { Title } from "../shared";
+import { Form } from "./Form";
+import { List } from "./List";
 
 export const Todo = () => {
   return (

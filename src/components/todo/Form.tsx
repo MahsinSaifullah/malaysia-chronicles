@@ -1,11 +1,20 @@
 import * as React from "react";
+import * as ReactRouter from "react-router-dom";
 
 export const Form = () => {
   const [item, setItem] = React.useState("");
+  const navigate = ReactRouter.useNavigate();
+  const { typeOfTodo } = ReactRouter.useParams();
 
   const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
+
+  React.useEffect(() => {
+    if (typeOfTodo !== "take" && typeOfTodo !== "bring") {
+      navigate("/");
+    }
+  }, [typeOfTodo]);
 
   return (
     <form
@@ -13,7 +22,7 @@ export const Form = () => {
       className="flex flex-col w-[40%] min-w-[400px] mt-[32px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] bg-stone-500 rounded-md p-8"
     >
       <label className="text-white max-w-[400px] text-xl tracking-widest font-medium border-b-[1px] pb-2 border-neutral-200">
-        What do you want to take?
+        What do you want to {typeOfTodo}?
       </label>
       <div className="mt-[32px] flex gap-4">
         <input

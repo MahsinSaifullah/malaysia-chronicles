@@ -9,11 +9,11 @@ export const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <Landing />,
       },
       {
-        path: "/todo/:typeOfTodo",
+        path: "todo/:typeOfTodo",
         element: <Todo />,
       },
     ],

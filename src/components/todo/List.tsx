@@ -4,23 +4,19 @@ import * as CustomHook from "../../hooks";
 
 export const List = () => {
   const { typeOfTodo } = ReactRouter.useParams();
-  const { takeTodos, bringTodos } = CustomHook.useTodo();
+  const { todos } = CustomHook.useTodo();
+
+  if (!typeOfTodo) {
+    return null;
+  }
+
+  const filteredTodos = todos.filter((todo) => todo.type === typeOfTodo);
+
   return (
     <ul className="flex gap-3 mt-[48px] flex-col w-[100%] items-center">
-      {typeOfTodo === "take" && (
-        <>
-          {takeTodos.map((todo) => (
-            <ListItem key={todo.id} todo={todo} />
-          ))}
-        </>
-      )}
-      {typeOfTodo === "bring" && (
-        <>
-          {bringTodos.map((todo) => (
-            <ListItem key={todo.id} todo={todo} />
-          ))}
-        </>
-      )}
+      {filteredTodos.map((todo) => (
+        <ListItem key={todo.id} todo={todo} />
+      ))}
     </ul>
   );
 };

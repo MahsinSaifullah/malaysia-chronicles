@@ -6,7 +6,7 @@ export interface ITodoContext {
   todoType: ITodoType | null;
   todos: ITodo[];
   addTodo: (newItem: string) => void;
-  updateTodo: (id: string) => void;
+  updateTodo: (id: string, desription: string) => void;
   deleteTodo: (id: string) => void;
   completeTodo: (id: string) => void;
   setTodoType: React.Dispatch<React.SetStateAction<ITodoType | null>>;
@@ -45,7 +45,20 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     setTodos((todos) => [...todos, newTodo]);
   };
 
-  const updateTodo = () => {};
+  const updateTodo = (id: string, desription: string) => {
+    setTodos((todos) =>
+      todos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            desription,
+          };
+        }
+
+        return todo;
+      })
+    );
+  };
 
   const deleteTodo = (id: string) => {
     setTodos((todos) => todos.filter((todo) => todo.id !== id));

@@ -1,11 +1,12 @@
 import * as React from "react";
+import { v4 as uuidv4 } from "uuid";
 import { ITodo, ITodoType } from "../types";
 
 export interface ITodoContext {
   todoType: ITodoType | null;
   takeTodos: ITodo[];
   bringTodos: ITodo[];
-  addTodo: (todo: ITodo) => void;
+  addTodo: (newItem: string) => void;
   updateTodo: (id: string) => void;
   deleteTodo: (id: string) => void;
   completeTodo: (id: string) => void;
@@ -29,47 +30,27 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [todoType, setTodoType] = React.useState<ITodoType | null>(null);
-  const [takeTodos, setTakeTodos] = React.useState<ITodo[]>([
-    {
-      id: "1",
-      desription: "passports",
-      isComplete: false,
-    },
-    {
-      id: "2",
-      desription: "ameerah's toys",
-      isComplete: false,
-    },
-    {
-      id: "3",
-      desription: "socks",
-      isComplete: false,
-    },
-  ]);
-  const [bringTodos, setBringTodos] = React.useState<ITodo[]>([
-    {
-      id: "1",
-      desription: "noodles",
-      isComplete: false,
-    },
-    {
-      id: "2",
-      desription: "dresses",
-      isComplete: false,
-    },
-    {
-      id: "3",
-      desription: "glasses",
-      isComplete: false,
-    },
-    {
-      id: "4",
-      desription: "lenses",
-      isComplete: false,
-    },
-  ]);
+  const [takeTodos, setTakeTodos] = React.useState<ITodo[]>([]);
+  const [bringTodos, setBringTodos] = React.useState<ITodo[]>([]);
 
-  const addTodo = () => {};
+  const addTodo = (newItem: string) => {
+    const newTodo: ITodo = {
+      id: uuidv4(),
+      desription: newItem,
+      isComplete: false,
+    };
+
+    if (!todoType) {
+      return;
+    }
+
+    if (todoType === "take") {
+      setTakeTodos((todos) => [...todos, newTodo]);
+    } else {
+      setBringTodos((todos) => [...todos, newTodo]);
+    }
+  };
+
   const updateTodo = () => {};
   const deleteTodo = () => {};
   const completeTodo = () => {};

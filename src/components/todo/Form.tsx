@@ -3,10 +3,17 @@ import * as CustomHook from "../../hooks";
 
 export const Form = () => {
   const [item, setItem] = React.useState("");
-  const { todoType } = CustomHook.useTodo();
+  const { todoType, addTodo } = CustomHook.useTodo();
 
   const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!item) {
+      return;
+    }
+
+    setItem("");
+    addTodo(item);
   };
 
   return (

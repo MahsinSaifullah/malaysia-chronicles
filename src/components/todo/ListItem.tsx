@@ -7,7 +7,7 @@ interface ListItemProps {
 }
 
 export const ListItem: React.FC<ListItemProps> = ({ todo }) => {
-  const { completeTodo } = CustomHook.useTodo();
+  const { completeTodo, deleteTodo } = CustomHook.useTodo();
   return (
     <li className="min-w-[400px] w-[50%] p-3 rounded-lg bg-slate-500 text-white flex items-center justify-between">
       <div className="flex items-center gap-2">
@@ -25,7 +25,10 @@ export const ListItem: React.FC<ListItemProps> = ({ todo }) => {
       </div>
       <div className="flex items-center gap-4">
         <PencilIcon className="h-5 w-5 text-white cursor-pointer" />
-        <TrashIcon className="h-5 w-5 text-red-300 cursor-pointer" />
+        <TrashIcon
+          onClick={() => deleteTodo(todo.id)}
+          className="h-5 w-5 text-red-300 cursor-pointer"
+        />
       </div>
     </li>
   );

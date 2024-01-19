@@ -46,7 +46,10 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const updateTodo = () => {};
-  const deleteTodo = () => {};
+
+  const deleteTodo = (id: string) => {
+    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+  };
 
   const completeTodo = (id: string) => {
     setTodos((todos) =>

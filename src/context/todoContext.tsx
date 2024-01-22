@@ -73,19 +73,17 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     await deleteDoc(doc(db, "tasks", id));
   };
 
-  const completeTodo = (id: string) => {
-    setTodos((todos) =>
-      todos.map((todo) => {
-        if (todo.id === id) {
-          return {
-            ...todo,
-            isComplete: !todo.isComplete,
-          };
-        }
+  const completeTodo = async (id: string) => {
+    const foundTodo = todos.find((todo) => todo.id === id);
 
-        return todo;
-      })
-    );
+    if (!foundTodo) {
+      return;
+    }
+
+    const updatedTodo = { ...foundTodo, isComplete: !foundTodo.isComplete };
+    setTodos((todos) => [...todos, updatedTodo]);
+
+    await setDoc(doc(db, "tasks", id), updatedTodo);
   };
 
   React.useEffect(

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, doc, onSnapshot, setDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 import { ITodo, ITodoType } from "../types";
 import { db } from "../firebase";
@@ -32,7 +32,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   const [todoType, setTodoType] = React.useState<ITodoType | null>(null);
   const [todos, setTodos] = React.useState<ITodo[]>([]);
 
-  const addTodo = (newItem: string) => {
+  const addTodo = async (newItem: string) => {
     if (!todoType) {
       return;
     }
@@ -45,6 +45,8 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     };
 
     setTodos((todos) => [...todos, newTodo]);
+
+    await setDoc(doc(db, "tasks", newTodo.id), newTodo);
   };
 
   const updateTodo = (id: string, description: string) => {
@@ -84,10 +86,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   React.useEffect(
     () =>
       onSnapshot(collection(db, "tasks"), (snapshot) => {
-        const remoteTodos = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as ITodo[];
+        const remoteTodos = snapshot.docs.map((doc) => doc.data()) as ITodo[];
 
         setTodos(remoteTodos);
       }),

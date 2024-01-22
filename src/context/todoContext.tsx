@@ -1,5 +1,11 @@
 import * as React from "react";
-import { collection, doc, onSnapshot, setDoc } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  setDoc,
+} from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 import { ITodo, ITodoType } from "../types";
 import { db } from "../firebase";
@@ -64,8 +70,9 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     );
   };
 
-  const deleteTodo = (id: string) => {
+  const deleteTodo = async (id: string) => {
     setTodos((todos) => todos.filter((todo) => todo.id !== id));
+    await deleteDoc(doc(db, "tasks", id));
   };
 
   const completeTodo = (id: string) => {

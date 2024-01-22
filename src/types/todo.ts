@@ -1,6 +1,6 @@
 export interface ITodo {
     id: string;
-    desription: string;
+    description: string;
     isComplete: boolean;
     type: ITodoType
 }

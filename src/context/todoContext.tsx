@@ -1,12 +1,14 @@
 import * as React from "react";
+import { collection, onSnapshot } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 import { ITodo, ITodoType } from "../types";
+import { db } from "../firebase";
 
 export interface ITodoContext {
   todoType: ITodoType | null;
   todos: ITodo[];
   addTodo: (newItem: string) => void;
-  updateTodo: (id: string, desription: string) => void;
+  updateTodo: (id: string, description: string) => void;
   deleteTodo: (id: string) => void;
   completeTodo: (id: string) => void;
   setTodoType: React.Dispatch<React.SetStateAction<ITodoType | null>>;
@@ -37,7 +39,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
 
     const newTodo: ITodo = {
       id: uuidv4(),
-      desription: newItem,
+      description: newItem,
       isComplete: false,
       type: todoType,
     };
@@ -45,13 +47,13 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     setTodos((todos) => [...todos, newTodo]);
   };
 
-  const updateTodo = (id: string, desription: string) => {
+  const updateTodo = (id: string, description: string) => {
     setTodos((todos) =>
       todos.map((todo) => {
         if (todo.id === id) {
           return {
             ...todo,
-            desription,
+            description,
           };
         }
 
@@ -78,6 +80,19 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
       })
     );
   };
+
+  React.useEffect(
+    () =>
+      onSnapshot(collection(db, "tasks"), (snapshot) => {
+        const remoteTodos = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as ITodo[];
+
+        setTodos(remoteTodos);
+      }),
+    []
+  );
 
   return (
     <TodoContext.Provider

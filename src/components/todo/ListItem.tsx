@@ -10,7 +10,7 @@ interface ListItemProps {
 
 export const ListItem: React.FC<ListItemProps> = ({ todo }) => {
   const [itemBeingEdited, setItemBeingEdited] = React.useState("");
-  const [editedItem, setEditedItem] = React.useState(todo.desription);
+  const [editedItem, setEditedItem] = React.useState(todo.description);
   const { completeTodo, deleteTodo, updateTodo } = CustomHook.useTodo();
 
   const handleTodoEdit = () => {
@@ -48,7 +48,7 @@ export const ListItem: React.FC<ListItemProps> = ({ todo }) => {
 
         {itemBeingEdited !== todo.id && (
           <h3 className={`${todo.isComplete ? "line-through" : ""}`}>
-            {todo.desription}
+            {todo.description}
           </h3>
         )}
       </div>

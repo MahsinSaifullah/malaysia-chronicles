@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   DragDropContext,
   Droppable,
@@ -7,6 +8,8 @@ import { ListItem } from "./ListItem";
 import * as ReactRouter from "react-router-dom";
 import * as CustomHook from "../../hooks";
 import { ITodo } from "../../types";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const reorderTodo = (list: ITodo[], startIndex: number, endIndex: number) => {
   const result = Array.from(list);
@@ -17,6 +20,7 @@ const reorderTodo = (list: ITodo[], startIndex: number, endIndex: number) => {
 };
 
 export const List = () => {
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
   const { typeOfTodo } = ReactRouter.useParams();
   const { todos, setTodos } = CustomHook.useTodo();
 
@@ -37,7 +41,21 @@ export const List = () => {
       result.destination.index
     );
 
-    setTodos(reorderedTodo);
+    const reorderedTodoWithCorrectedIndex = reorderedTodo.map((todo, index) => {
+      return { ...todo, index };
+    });
+
+    setTodos(reorderedTodoWithCorrectedIndex);
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(async () => {
+      for (const todo of reorderedTodoWithCorrectedIndex) {
+        await setDoc(doc(db, "tasks", todo.id), todo);
+      }
+    }, 3000);
   };
 
   return (

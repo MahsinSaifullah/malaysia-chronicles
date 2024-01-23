@@ -50,25 +50,10 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
       description: newItem,
       isComplete: false,
       type: todoType,
+      index: todos.length > 0 ? todos.length : 0,
     };
 
-    setTodos((todos) => [...todos, newTodo]);
-
     await setDoc(doc(db, "tasks", newTodo.id), newTodo);
-  };
-
-  const updateTodo = async (updatedTodo: ITodo) => {
-    setTodos((todos) =>
-      todos.map((todo) => {
-        if (todo.id === updatedTodo.id) {
-          return updatedTodo;
-        }
-
-        return todo;
-      })
-    );
-
-    await setDoc(doc(db, "tasks", updatedTodo.id), updatedTodo);
   };
 
   const updateDescription = async (id: string, description: string) => {
@@ -79,11 +64,10 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     const updatedTodo = { ...foundTodo, description };
-    await updateTodo(updatedTodo);
+    await setDoc(doc(db, "tasks", id), updatedTodo);
   };
 
   const deleteTodo = async (id: string) => {
-    setTodos((todos) => todos.filter((todo) => todo.id !== id));
     await deleteDoc(doc(db, "tasks", id));
   };
 
@@ -95,13 +79,16 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     const updatedTodo = { ...foundTodo, isComplete: !foundTodo.isComplete };
-    await updateTodo(updatedTodo);
+    await setDoc(doc(db, "tasks", id), updatedTodo);
   };
 
   React.useEffect(
     () =>
       onSnapshot(collection(db, "tasks"), (snapshot) => {
-        const remoteTodos = snapshot.docs.map((doc) => doc.data()) as ITodo[];
+        const remoteTodos = snapshot.docs
+          .map((doc) => doc.data())
+          .slice()
+          .sort((a, b) => a.index - b.index) as ITodo[];
 
         setTodos(remoteTodos);
       }),

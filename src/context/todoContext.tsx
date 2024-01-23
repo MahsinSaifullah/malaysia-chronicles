@@ -18,6 +18,7 @@ export interface ITodoContext {
   deleteTodo: (id: string) => void;
   completeTodo: (id: string) => void;
   setTodoType: React.Dispatch<React.SetStateAction<ITodoType | null>>;
+  setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>;
 }
 
 const initialState: ITodoContext = {
@@ -28,6 +29,7 @@ const initialState: ITodoContext = {
   deleteTodo: () => {},
   completeTodo: () => {},
   setTodoType: () => {},
+  setTodos: () => {},
 };
 
 export const TodoContext = React.createContext<ITodoContext>(initialState);
@@ -116,6 +118,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
         deleteTodo,
         completeTodo,
         setTodoType,
+        setTodos,
       }}
     >
       {children}

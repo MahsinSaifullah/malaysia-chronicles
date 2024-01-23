@@ -14,7 +14,7 @@ export interface ITodoContext {
   todoType: ITodoType | null;
   todos: ITodo[];
   addTodo: (newItem: string) => void;
-  updateTodo: (id: string, description: string) => void;
+  updateDescription: (id: string, description: string) => void;
   deleteTodo: (id: string) => void;
   completeTodo: (id: string) => void;
   setTodoType: React.Dispatch<React.SetStateAction<ITodoType | null>>;
@@ -24,7 +24,7 @@ const initialState: ITodoContext = {
   todoType: null,
   todos: [],
   addTodo: () => {},
-  updateTodo: () => {},
+  updateDescription: () => {},
   deleteTodo: () => {},
   completeTodo: () => {},
   setTodoType: () => {},
@@ -55,7 +55,21 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     await setDoc(doc(db, "tasks", newTodo.id), newTodo);
   };
 
-  const updateTodo = async (id: string, description: string) => {
+  const updateTodo = async (updatedTodo: ITodo) => {
+    setTodos((todos) =>
+      todos.map((todo) => {
+        if (todo.id === updatedTodo.id) {
+          return updatedTodo;
+        }
+
+        return todo;
+      })
+    );
+
+    await setDoc(doc(db, "tasks", updatedTodo.id), updatedTodo);
+  };
+
+  const updateDescription = async (id: string, description: string) => {
     const foundTodo = todos.find((todo) => todo.id === id);
 
     if (!foundTodo) {
@@ -63,9 +77,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     const updatedTodo = { ...foundTodo, description };
-    setTodos((todos) => [...todos, updatedTodo]);
-
-    await setDoc(doc(db, "tasks", id), updatedTodo);
+    await updateTodo(updatedTodo);
   };
 
   const deleteTodo = async (id: string) => {
@@ -81,9 +93,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     const updatedTodo = { ...foundTodo, isComplete: !foundTodo.isComplete };
-    setTodos((todos) => [...todos, updatedTodo]);
-
-    await setDoc(doc(db, "tasks", id), updatedTodo);
+    await updateTodo(updatedTodo);
   };
 
   React.useEffect(
@@ -102,7 +112,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
         todoType,
         todos,
         addTodo,
-        updateTodo,
+        updateDescription,
         deleteTodo,
         completeTodo,
         setTodoType,

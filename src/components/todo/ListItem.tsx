@@ -11,11 +11,11 @@ interface ListItemProps {
 export const ListItem: React.FC<ListItemProps> = ({ todo }) => {
   const [itemBeingEdited, setItemBeingEdited] = React.useState("");
   const [editedItem, setEditedItem] = React.useState(todo.description);
-  const { completeTodo, deleteTodo, updateTodo } = CustomHook.useTodo();
+  const { completeTodo, deleteTodo, updateDescription } = CustomHook.useTodo();
 
   const handleTodoEdit = () => {
     setItemBeingEdited("");
-    updateTodo(todo.id, editedItem);
+    updateDescription(todo.id, editedItem);
   };
 
   return (

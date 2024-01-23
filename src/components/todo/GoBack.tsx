@@ -5,7 +5,7 @@ export const GoBack = () => {
   return (
     <Link
       to="/"
-      className="w-[40%] flex justify-end mb-6 text-white items-center gap-1"
+      className="w-[40%] min-w-[350px] md:min-w-[400px] flex justify-end mb-6 text-white items-center gap-1"
     >
       <ArrowLeftCircleIcon className="h-5 w-5 text-white cursor-pointer" />
       Back

@@ -19,7 +19,7 @@ export const ListItem: React.FC<ListItemProps> = ({ todo }) => {
   };
 
   return (
-    <li className="min-w-[400px] w-[50%] p-3 rounded-lg bg-slate-500 text-white flex items-center justify-between">
+    <li className="min-w-[330px] md:min-w-[400px] w-[50%] p-2 md:p-3 rounded-lg bg-slate-500 text-white flex items-center justify-between">
       <div className="flex items-center gap-2">
         <input
           type="checkbox"
@@ -47,12 +47,16 @@ export const ListItem: React.FC<ListItemProps> = ({ todo }) => {
         )}
 
         {itemBeingEdited !== todo.id && (
-          <h3 className={`${todo.isComplete ? "line-through" : ""}`}>
+          <h3
+            className={`${
+              todo.isComplete ? "line-through" : ""
+            } text-sm md:text-lg`}
+          >
             {todo.description}
           </h3>
         )}
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 md:gap-4">
         <PencilIcon
           onClick={() => {
             if (itemBeingEdited === todo.id) {
@@ -61,11 +65,11 @@ export const ListItem: React.FC<ListItemProps> = ({ todo }) => {
               setItemBeingEdited(todo.id);
             }
           }}
-          className="h-5 w-5 text-white cursor-pointer"
+          className="h-4 w-4 md:h-5 md:w-5 text-white cursor-pointer"
         />
         <TrashIcon
           onClick={() => deleteTodo(todo.id)}
-          className="h-5 w-5 text-red-300 cursor-pointer"
+          className="h-4 w-4 md:h-5 md:w-5 text-red-300 cursor-pointer"
         />
       </div>
     </li>

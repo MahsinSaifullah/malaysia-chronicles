@@ -19,7 +19,7 @@ export const Todo = () => {
     }
 
     setTodoType(typeOfTodo as ITodoType);
-  }, [typeOfTodo]);
+  }, [typeOfTodo]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <section className="flex flex-col h-[100%] items-center pt-[72px] overflow-scroll pb-10 relative">

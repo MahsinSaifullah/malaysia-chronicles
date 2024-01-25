@@ -8,7 +8,7 @@ export const Landing = () => {
 
   React.useEffect(() => {
     setTodoType(null);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <section className="flex h-[100%] w-[100%] flex-col gap-y-16 justify-center items-center">

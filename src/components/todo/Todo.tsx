@@ -6,11 +6,12 @@ import { Title } from "../shared";
 import { Form } from "./Form";
 import { GoBack } from "./GoBack";
 import { List } from "./List";
+import { ClearAll } from "./ClearAll";
 
 export const Todo = () => {
   const navigate = ReactRouter.useNavigate();
   const { typeOfTodo } = ReactRouter.useParams();
-  const { setTodoType } = CustomHook.useTodo();
+  const { setTodoType, todos } = CustomHook.useTodo();
 
   React.useEffect(() => {
     if (typeOfTodo !== "take" && typeOfTodo !== "bring") {
@@ -25,6 +26,7 @@ export const Todo = () => {
       <GoBack />
       <Title />
       <Form />
+      {!!todos.length && <ClearAll />}
       <List />
     </section>
   );

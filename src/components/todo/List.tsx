@@ -65,7 +65,7 @@ export const List = () => {
           <ul
             {...provided.droppableProps}
             ref={provided.innerRef}
-            className="flex gap-2 md:gap-3 mt-[24px] md:mt-[48px] flex-col w-[100%] items-center"
+            className="flex gap-2 md:gap-3 mt-[8px] md:mt-[24px] flex-col w-[100%] items-center"
           >
             {filteredTodos.map((todo, index) => (
               <ListItem key={todo.id} todo={todo} index={index} />

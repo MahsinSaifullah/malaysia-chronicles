@@ -17,6 +17,7 @@ export interface ITodoContext {
   updateDescription: (id: string, description: string) => void;
   deleteTodo: (id: string) => void;
   completeTodo: (id: string) => void;
+  clearAll: () => void;
   setTodoType: React.Dispatch<React.SetStateAction<ITodoType | null>>;
   setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>;
 }
@@ -28,6 +29,7 @@ const initialState: ITodoContext = {
   updateDescription: () => {},
   deleteTodo: () => {},
   completeTodo: () => {},
+  clearAll: () => {},
   setTodoType: () => {},
   setTodos: () => {},
 };
@@ -82,6 +84,12 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     await setDoc(doc(db, "tasks", id), updatedTodo);
   };
 
+  const clearAll = async () => {
+    for (const todo of todos) {
+      await deleteDoc(doc(db, "tasks", todo.id));
+    }
+  };
+
   React.useEffect(
     () =>
       onSnapshot(collection(db, "tasks"), (snapshot) => {
@@ -104,6 +112,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
         updateDescription,
         deleteTodo,
         completeTodo,
+        clearAll,
         setTodoType,
         setTodos,
       }}

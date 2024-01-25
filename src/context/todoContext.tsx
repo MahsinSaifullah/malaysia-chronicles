@@ -85,7 +85,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const clearAll = async () => {
-    for (const todo of todos) {
+    for (const todo of todos.filter((todo) => todo.type === todoType)) {
       await deleteDoc(doc(db, "tasks", todo.id));
     }
   };

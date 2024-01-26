@@ -29,7 +29,7 @@ export const ListItem: React.FC<ListItemProps> = ({ todo, index }) => {
           {...provided.dragHandleProps}
           className="min-w-[330px] md:min-w-[400px] w-[50%] p-2 md:p-3 rounded-lg bg-slate-500 text-white flex items-center justify-between"
         >
-          <div className="flex items-center gap-2">
+          <div className="flex max-w-[80%] items-center gap-2">
             <input
               type="checkbox"
               checked={todo.isComplete}

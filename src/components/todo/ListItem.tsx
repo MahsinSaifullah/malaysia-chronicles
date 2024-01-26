@@ -46,7 +46,7 @@ export const ListItem: React.FC<ListItemProps> = ({ todo, index }) => {
                 }}
               >
                 <TextInput
-                  className="text-black"
+                  className="text-black max-w-[50%]"
                   value={editedItem}
                   size="small"
                   onChange={(event) => setEditedItem(event.target.value)}

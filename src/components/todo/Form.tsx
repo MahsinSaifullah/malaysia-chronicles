@@ -28,7 +28,7 @@ export const Form = () => {
         </label>
       )}
 
-      <div className="mt-[32px] flex gap-4">
+      <div className="mt-[32px] flex gap-4 w-[100%]">
         <TextInput
           value={item}
           size="large"

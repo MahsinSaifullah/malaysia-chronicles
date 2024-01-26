@@ -34,7 +34,6 @@ export const Form = () => {
           size="large"
           onChange={(event) => setItem(event.target.value)}
           placeholder="New item..."
-          className="grow"
         />
         <button className="text-sm md:text-lg text-white bg-gradient-to-r from-stone-600 to-slate-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-stone-300 dark:focus:ring-slate-800 font-medium rounded-lg px-5 py-1 md:px-7 md:py-2.5 text-center">
           Add

@@ -40,7 +40,7 @@ export const TextInput: React.FC<TextInputProps> = ({
     <input
       value={value}
       onChange={onChange}
-      className={`border-none outline-none p-2 text-sm md:text-lg ${inputSize} bg-[#f7f1f1] rounded-md flex-grow shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] ${className}`}
+      className={`border-none outline-none p-2 text-sm md:text-lg max-w-[80%] ${inputSize} bg-[#f7f1f1] rounded-md flex-grow shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] ${className}`}
       placeholder={placeholder}
     />
   );

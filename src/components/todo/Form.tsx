@@ -20,7 +20,7 @@ export const Form = () => {
   return (
     <form
       onSubmit={handleOnSubmit}
-      className="flex flex-col w-[40%] min-w-[300px] md:min-w-[400px] mt-[32px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] bg-stone-500 rounded-md p-8"
+      className="flex flex-col w-[40%] max-w-[600px] min-w-[300px] md:min-w-[400px] mt-[32px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] bg-stone-500 rounded-md p-8"
     >
       {todoType && (
         <label className="text-white max-w-[400px] text-sm md:text-xl tracking-widest font-medium border-b-[1px] pb-2 border-neutral-200">

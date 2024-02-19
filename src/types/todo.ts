@@ -1,9 +1,7 @@
 export interface ITodo {
-    id: string;
-    description: string;
-    isComplete: boolean;
-    type: ITodoType;
-    index: number;
+  id: string;
+  description: string;
+  isComplete: boolean;
+  type: string;
+  index: number;
 }
-
-export type ITodoType = 'take' | 'bring'

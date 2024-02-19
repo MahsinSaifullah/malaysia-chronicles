@@ -1,24 +1,24 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   collection,
   deleteDoc,
   doc,
   onSnapshot,
   setDoc,
-} from "firebase/firestore";
-import { v4 as uuidv4 } from "uuid";
-import { ITodo, ITodoType } from "../types";
-import { db } from "../firebase";
+} from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
+import { ITodo } from '../types';
+import { db } from '../firebase';
 
 export interface ITodoContext {
-  todoType: ITodoType | null;
+  todoType: string | null;
   todos: ITodo[];
   addTodo: (newItem: string) => void;
   updateDescription: (id: string, description: string) => void;
   deleteTodo: (id: string) => void;
   completeTodo: (id: string) => void;
   clearAll: () => void;
-  setTodoType: React.Dispatch<React.SetStateAction<ITodoType | null>>;
+  setTodoType: React.Dispatch<React.SetStateAction<string | null>>;
   setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>;
 }
 
@@ -39,7 +39,7 @@ export const TodoContext = React.createContext<ITodoContext>(initialState);
 export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [todoType, setTodoType] = React.useState<ITodoType | null>(null);
+  const [todoType, setTodoType] = React.useState<string | null>(null);
   const [todos, setTodos] = React.useState<ITodo[]>([]);
 
   const addTodo = async (newItem: string) => {
@@ -55,7 +55,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
       index: todos.length > 0 ? todos.length : 0,
     };
 
-    await setDoc(doc(db, "tasks", newTodo.id), newTodo);
+    await setDoc(doc(db, 'tasks', newTodo.id), newTodo);
   };
 
   const updateDescription = async (id: string, description: string) => {
@@ -66,11 +66,11 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     const updatedTodo = { ...foundTodo, description };
-    await setDoc(doc(db, "tasks", id), updatedTodo);
+    await setDoc(doc(db, 'tasks', id), updatedTodo);
   };
 
   const deleteTodo = async (id: string) => {
-    await deleteDoc(doc(db, "tasks", id));
+    await deleteDoc(doc(db, 'tasks', id));
   };
 
   const completeTodo = async (id: string) => {
@@ -81,18 +81,18 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     const updatedTodo = { ...foundTodo, isComplete: !foundTodo.isComplete };
-    await setDoc(doc(db, "tasks", id), updatedTodo);
+    await setDoc(doc(db, 'tasks', id), updatedTodo);
   };
 
   const clearAll = async () => {
     for (const todo of todos.filter((todo) => todo.type === todoType)) {
-      await deleteDoc(doc(db, "tasks", todo.id));
+      await deleteDoc(doc(db, 'tasks', todo.id));
     }
   };
 
   React.useEffect(
     () =>
-      onSnapshot(collection(db, "tasks"), (snapshot) => {
+      onSnapshot(collection(db, 'tasks'), (snapshot) => {
         const remoteTodos = snapshot.docs
           .map((doc) => doc.data())
           .slice()

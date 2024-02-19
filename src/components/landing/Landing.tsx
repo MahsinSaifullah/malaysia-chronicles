@@ -1,14 +1,14 @@
-import * as React from "react";
-import * as CustomHook from "../../hooks";
-import { Link } from "react-router-dom";
-import { Title } from "../shared";
+import * as React from 'react';
+import * as CustomHook from '../../hooks';
+import { Link } from 'react-router-dom';
+import { Title } from '../shared';
 
 export const Landing = () => {
   const { setTodoType } = CustomHook.useTodo();
 
   React.useEffect(() => {
     setTodoType(null);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [setTodoType]);
 
   return (
     <section className="flex h-[100%] w-[100%] flex-col gap-y-16 justify-center items-center">

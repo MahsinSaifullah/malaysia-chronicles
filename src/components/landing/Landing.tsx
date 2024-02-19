@@ -19,7 +19,7 @@ export const Landing = () => {
           Choose your path:
         </h3>
       </div>
-      <div className="grid grid-cols-2 justify-center gap-8">
+      <div className="grid grid-cols-2 justify-center gap-4">
         {allTodoTypes.map((todoType) => {
           return (
             <Link
@@ -32,6 +32,9 @@ export const Landing = () => {
           );
         })}
       </div>
+      <button className="text-sm md:text-lg w-1/2 max-w-[300px] md:min-w-[200px] bg-transparent border border-slate-500 hover:bg-slate-500 text-white py-2 px-4 rounded text-center mt-[-20px]">
+        Add a new type
+      </button>
     </section>
   );
 };

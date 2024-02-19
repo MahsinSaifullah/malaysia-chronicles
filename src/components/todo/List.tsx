@@ -1,15 +1,15 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   DragDropContext,
   Droppable,
   OnDragEndResponder,
-} from "react-beautiful-dnd";
-import { ListItem } from "./ListItem";
-import * as ReactRouter from "react-router-dom";
-import * as CustomHook from "../../hooks";
-import { ITodo } from "../../types";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../firebase";
+} from 'react-beautiful-dnd';
+import { ListItem } from './ListItem';
+import * as ReactRouter from 'react-router-dom';
+import * as CustomHook from '../../hooks';
+import { ITodo } from '../../types';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 const reorderTodo = (list: ITodo[], startIndex: number, endIndex: number) => {
   const result = Array.from(list);
@@ -53,7 +53,7 @@ export const List = () => {
 
     timeoutRef.current = setTimeout(async () => {
       for (const todo of reorderedTodoWithCorrectedIndex) {
-        await setDoc(doc(db, "tasks", todo.id), todo);
+        await setDoc(doc(db, 'tasks', todo.id), todo);
       }
     }, 3000);
   };

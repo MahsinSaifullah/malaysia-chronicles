@@ -27,7 +27,7 @@ export const Todo = () => {
       <GoBack />
       <Title />
       <Form />
-      {!filteredTodos.length && <ClearAll />}
+      {filteredTodos.length && <ClearAll />}
       <List />
     </section>
   );

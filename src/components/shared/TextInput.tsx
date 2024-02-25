@@ -42,7 +42,7 @@ export const TextInput: React.FC<TextInputProps> = ({
       value={value}
       onChange={onChange}
       className={twMerge(
-        'border-none outline-none p-2 text-sm md:text-lg max-w-[70%] bg-[#f7f1f1] rounded-md flex-grow shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]',
+        'border-none outline-none p-2 text-sm md:text-lg bg-[#f7f1f1] rounded-md flex-grow shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]',
         inputSize,
         className
       )}

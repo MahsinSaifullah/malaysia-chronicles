@@ -40,7 +40,9 @@ export const Landing = () => {
       >
         Add a new type
       </button>
-      {isFormModalOpen && <TodoTypeFormModal />}
+      {isFormModalOpen && (
+        <TodoTypeFormModal closeModal={() => setIsFormModalOpen(false)} />
+      )}
     </section>
   );
 };

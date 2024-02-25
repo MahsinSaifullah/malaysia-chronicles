@@ -1,9 +1,9 @@
-import * as CustomHook from "../../hooks";
-import * as React from "react";
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { ITodo } from "../../types";
-import { TextInput } from "../shared";
-import { Draggable } from "react-beautiful-dnd";
+import * as CustomHook from '../../hooks';
+import * as React from 'react';
+import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
+import { ITodo } from '../../types';
+import { TextInput } from '../shared';
+import { Draggable } from 'react-beautiful-dnd';
 
 interface ListItemProps {
   todo: ITodo;
@@ -11,12 +11,12 @@ interface ListItemProps {
 }
 
 export const ListItem: React.FC<ListItemProps> = ({ todo, index }) => {
-  const [itemBeingEdited, setItemBeingEdited] = React.useState("");
+  const [itemBeingEdited, setItemBeingEdited] = React.useState('');
   const [editedItem, setEditedItem] = React.useState(todo.description);
   const { completeTodo, deleteTodo, updateDescription } = CustomHook.useTodo();
 
   const handleTodoEdit = () => {
-    setItemBeingEdited("");
+    setItemBeingEdited('');
     updateDescription(todo.id, editedItem);
   };
 
@@ -46,9 +46,9 @@ export const ListItem: React.FC<ListItemProps> = ({ todo, index }) => {
                 }}
               >
                 <TextInput
-                  className="text-black max-w-[50%]"
+                  className="text-black max-w-[80%]"
                   value={editedItem}
-                  size="small"
+                  size="large"
                   onChange={(event) => setEditedItem(event.target.value)}
                   placeholder="item..."
                 />
@@ -58,7 +58,7 @@ export const ListItem: React.FC<ListItemProps> = ({ todo, index }) => {
             {itemBeingEdited !== todo.id && (
               <h3
                 className={`${
-                  todo.isComplete ? "line-through" : ""
+                  todo.isComplete ? 'line-through' : ''
                 } text-sm md:text-lg`}
               >
                 {todo.description}

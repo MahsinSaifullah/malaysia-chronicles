@@ -1,6 +1,7 @@
-import * as React from "react";
+import * as React from 'react';
+import { twMerge } from 'tailwind-merge';
 
-type InputSize = "large" | "medium" | "small";
+type InputSize = 'large' | 'medium' | 'small';
 
 interface TextInputProps {
   value?: string | number | readonly string[];
@@ -18,21 +19,21 @@ export const TextInput: React.FC<TextInputProps> = ({
   placeholder,
   size,
 }) => {
-  let inputSize = "";
+  let inputSize = '';
 
   switch (size) {
-    case "large":
-      inputSize = "md:p-3";
+    case 'large':
+      inputSize = 'md:p-3';
       break;
-    case "medium":
-      inputSize = "md:p-2";
+    case 'medium':
+      inputSize = 'md:p-2';
       break;
-    case "small":
-      inputSize = "md:p-1";
+    case 'small':
+      inputSize = 'md:p-1';
       break;
 
     default:
-      inputSize = "md:p-3";
+      inputSize = 'md:p-3';
       break;
   }
 
@@ -40,7 +41,11 @@ export const TextInput: React.FC<TextInputProps> = ({
     <input
       value={value}
       onChange={onChange}
-      className={`border-none outline-none p-2 text-sm md:text-lg max-w-[70%] ${inputSize} bg-[#f7f1f1] rounded-md flex-grow shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] ${className}`}
+      className={twMerge(
+        'border-none outline-none p-2 text-sm md:text-lg max-w-[70%] bg-[#f7f1f1] rounded-md flex-grow shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]',
+        inputSize,
+        className
+      )}
       placeholder={placeholder}
     />
   );

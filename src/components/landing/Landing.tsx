@@ -2,8 +2,10 @@ import * as React from 'react';
 import * as CustomHook from '../../hooks';
 import { Link } from 'react-router-dom';
 import { Title } from '../shared';
+import { TodoTypeFormModal } from './TodoTypeFormModal';
 
 export const Landing = () => {
+  const [isFormModalOpen, setIsFormModalOpen] = React.useState(false);
   const { setTodoType } = CustomHook.useTodo();
   const { allTodoTypes } = CustomHook.useTodoType();
 
@@ -32,9 +34,13 @@ export const Landing = () => {
           );
         })}
       </div>
-      <button className="text-sm md:text-lg w-1/2 max-w-[300px] md:min-w-[200px] bg-transparent border border-slate-500 hover:bg-slate-500 text-white py-2 px-4 rounded text-center mt-[-20px]">
+      <button
+        onClick={() => setIsFormModalOpen(true)}
+        className="text-sm md:text-lg w-1/2 max-w-[300px] md:min-w-[200px] bg-transparent border border-slate-500 hover:bg-slate-500 text-white py-2 px-4 rounded text-center mt-[-20px]"
+      >
         Add a new type
       </button>
+      {isFormModalOpen && <TodoTypeFormModal />}
     </section>
   );
 };

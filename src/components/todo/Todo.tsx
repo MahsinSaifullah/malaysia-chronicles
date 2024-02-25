@@ -8,7 +8,6 @@ import { List } from './List';
 import { ClearAll } from './ClearAll';
 
 export const Todo = () => {
-  const navigate = ReactRouter.useNavigate();
   const { typeOfTodo } = ReactRouter.useParams();
   const { setTodoType, todos } = CustomHook.useTodo();
 
@@ -18,7 +17,7 @@ export const Todo = () => {
     }
 
     setTodoType(typeOfTodo);
-  }, [typeOfTodo, navigate]);
+  }, [typeOfTodo, setTodoType]);
 
   const filteredTodos = todos.filter((todo) => todo.type === typeOfTodo);
 
